@@ -108,26 +108,13 @@ progressContainer.addEventListener('click', setProgress)
 //Autoplay
 //audio.addEventListener('ended', nextSong)
 
-function* iterateArray(array) {
-    for (const entry of array) {
-        yield entry;
-    }
-}
 
-var iterifyArr = function (arr, current) {
-    var cur = current;
-    arr.next1 = (function () { return (++cur >= this.length) ? false : this[cur]; });
-    arr.prev1 = (function () { return (--cur < 0) ? false : this[cur]; });
-    return arr;
-};
 
 // Clicked on song
 //________________________________________________________________________________________________________________
 var highlightedItems = document.querySelectorAll(".pesnya");
 
 highlightedItems.forEach(function (Element) {
-    var audioFromList = Element.children[0].children[3].innerHTML;
-
 
     //Clicked
     Element.children[0].children[1].addEventListener('click', () => {
@@ -138,41 +125,25 @@ highlightedItems.forEach(function (Element) {
             Element.children[0].children[2].classList = 'nowPlaying';
 
         })
-
-
-
-
+        var audioFromList = Element.children[0].children[3].innerHTML;
         var currentArrayIndex = Element.children[0].children[0].innerHTML -1;
         var lengthOfAlbum = Element.children[0].children[7].innerHTML
         var songsFromOneAlbum = document.querySelectorAll(`[id^="${Element.children[0].children[8].innerHTML}"]`)
 
-
-
-        //console.log(songsFromOneAlbum[Element.children[0].children[0].innerHTML -1])
-        console.log(currentArrayIndex)
-        console.log(songsFromOneAlbum[currentArrayIndex])
-        console.log(lengthOfAlbum)
-
-
         nextBtn.addEventListener('click', () => {
-            songsFromOneAlbum[currentArrayIndex]
-            songsFromOneAlbum[currentArrayIndex].children[1].click
-            if (songsFromOneAlbum[currentArrayIndex +1] < lengthOfAlbum) {
-                console.log('menshe')
-                songsFromOneAlbum[currentArrayIndex +1].children[1].click
+            if ((lengthOfAlbum-1) < (currentArrayIndex +1)) {
+                songsFromOneAlbum[0].children[1].click()
             } else {
-                songsFromOneAlbum[0].children[1].click
+                songsFromOneAlbum[currentArrayIndex +1].children[1].click()
             }
-
-
         })
-
-
         prevBtn.addEventListener('click', () => {
-            highlightedItems[currentArrayIndex -1].children[0].children[1].click()
+            if (!songsFromOneAlbum[currentArrayIndex -1]) {
+                songsFromOneAlbum[0].children[1].click()
+            } else {
+                songsFromOneAlbum[currentArrayIndex -1].children[1].click()
+            }
         })
-
-
 
 
         Element.children[0].children[2].classList = 'nowPlaying1';
