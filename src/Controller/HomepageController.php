@@ -16,6 +16,7 @@ class HomepageController extends AbstractController
      */
     public function homepage(ArtistsRepository $artistsRepository): Response
     {
+        var_dump($_POST);
         return $this->render('homepage.html.twig');
     }
 

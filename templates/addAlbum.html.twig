@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <button class="btn btn-outline-secondary"><a href="/admin">Назад</a></button>
+
+    <h1>Добавить новый альбом:</h1>
+    <div class="createNewForm">
+        <h3>Add new album</h3>
+        {{ form(newAlbumForm) }}
+    </div>
+
+{% endblock %}

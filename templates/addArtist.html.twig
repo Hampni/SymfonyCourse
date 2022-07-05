@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div>
+        <button class="btn btn-outline-secondary"><a href="/admin">Назад</a></button>
+    </div>
+    <div>
+        <div><h1>Добавить нового исполнителя:</h1></div>
+    </div>
+
+    <div class="createNewForm">
+        <h3>Add new artist:</h3>
+        {{ form(addArtistForm) }}
+    </div>
+
+
+
+    <div class="convertAdminPanel">
+        <div>
+            <h1>Поиск исполнителя:</h1>
+            <form style="padding-bottom: 70px" action="" method="post">
+                <div style="width: 95%;" class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Введите имя</label>
+                    <input type="text" value="{{ postRequest }}" name="nameToFind" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Поиск</button>
+            </form>
+        </div>
+        <h2>Все исполнители:</h2>
+        <h4>{{ sorry }}</h4>
+        <p></p>
+        {% for artist in artists %}
+            <div style="float: left; padding-right: 20px"><a href="/artists/{{ artist.id }}"><img
+                            src="/images/artistsImage/{{ artist.image }}" alt="{{ artist.name }}"
+                            style="border-radius: 1000px; width: 250px; border: solid #210d0d 1px"></a>
+                <a href="/artists/{{ artist.id }}"
+                   style="text-decoration: none; color: #d6d6d6; text-transform: uppercase"><h3
+                            style="text-align: center">{{ artist.name }}</h3></a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

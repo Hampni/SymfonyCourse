@@ -15,9 +15,9 @@
                     <div class="backAlb">
                         <img class="albums" src="/images/albumsImages/{{ album.image }}"
                              alt="img">
-                        <span style="font-size: 30px; vertical-align: bottom">{{ album.name }}</span>
+                        <span style="font-size: 25px; vertical-align: middle">{{ album.name }}</span>
                         <div style=" border-bottom: solid 1px grey;padding-left: 15px; margin-top: 70px; margin-bottom: 8px">
-                            #
+                             #
                             <span style="margin-left: 155px">TITLE</span>
                             <span style="margin-left: 410px">PLAYS</span>
                         </div>
@@ -27,21 +27,32 @@
                                 {% for key,song in songs %}
                                     {% if album.id == song.albumId %}
                                         <div class="pesnya">
-                                            <div class="numberPlay" style="padding: 20px; margin-bottom: 0;" id="{{ album.id }}">
-                                                <span class="songId">{{ key + 1 }}</span>
-                                                <button style="height: 40px" class="btn playOnTrack"><img
+                                            <div class="numberPlay" style="padding: 5px; margin-bottom: 0;"
+                                                 id="{{ album.id }}">
+                                                <span style="margin-left: 10px" class="songId">{{ key + 1 }}</span>
+                                                <button style=" border: none;height: 40px" class="btn playOnTrack"><img
                                                             class="imagePlay"
                                                             style="width: 25px;"
                                                             src="/images/playerImages/pngwing.com.png"
                                                             alt=""></button>
-                                                <span class="nowPlaying"> Now playing </span>
+                                                <span class="nowPlaying"> </span>
                                                 <span class="songName"
-                                                      style="margin-left: 100px;display: inline-block; max-width: 300px; width: 100%;">{{ song.name }}</span>
+                                                      style=";display: inline-block;  max-width: 300px; width: 100%;">{{ song.name }}</span>
                                                 <span style="margin-left: 150px;"> {{ song.countSongs }} </span>
                                                 <audio class="muzlo" src="/audio/{{ song.name }}"></audio>
-                                                <span class="duration"></span>
+                                                <span style="display: none" class="albumImage">{{ album.image }}</span>
                                                 <span style="display: none"> {{ songs | length }}</span>
-                                                <span>{{ song.albumId }}</span>
+                                                <span style="display: none">{{ song.albumId }}</span>
+                                                <button class="btn btn-outline-secondary"
+                                                        style="margin-left: 180px;border: none;padding-bottom: 10px">
+                                                    <a
+                                                            style="text-decoration: none; color: white;"
+                                                            href="/audio/{{ song.name }}.mp3"
+                                                            download="audio/{{ song.name }}.mp3">
+                                                        <img style=" width: 20px;"
+                                                             src="/images/playerImages/download.png" alt="">
+                                                    </a>
+                                                </button>
                                             </div>
                                         </div>
                                     {% endif %}
@@ -55,20 +66,30 @@
     </div>
     <div class="wrapper">
         <div class="player">
-            <div class="title"></div>
-            <div class="cover"></div>
-            <div class="song">Комар-парижанин</div>
-            <audio class="audio" src="/audio/GSPD, Слава КПСС - Комар-парижанин (Rework 2021).mp3"></audio>
-            <div class="progress_container">
-                <div class="progress"></div>
-            </div>
-            <div class="buttons">
-                <div class="btn prev"><img style="width: 30px; border-radius: 10px" src="/images/playerImages/prev.jpg"
-                                           alt="btn"></div>
-                <div class="btn play"><img style="width: 30px; border-radius: 10px" class="img__src"
-                                           src="/images/playerImages/play.jpg" alt="btn"></div>
-                <div class="btn next"><img style="width: 30px; border-radius: 10px" src="/images/playerImages/next.jpg"
-                                           alt="btn"></div>
+            <div class="controls">
+                <div class="title"></div>
+                <div class="cover"></div>
+                <img class="playerImage" src="/images/artistsImage/500x500.jpg" alt="">
+                <div class="song">kdkslcm</div>
+                <audio class="audio" src="/audio/GSPD, Слава КПСС - Комар-парижанин (Rework 2021).mp3"></audio>
+
+                <div class="progress_container">
+                    <div class="progress"></div>
+                </div>
+
+                <div style="float: left" class="progressTime">00:00</div>
+                <div style="float: left; margin-left: 95px" class="buttons">
+                    <div class="btn prev"><img style="width: 30px; border-radius: 10px"
+                                               src="/images/playerImages/prev.jpg"
+                                               alt="btn"></div>
+                    <div class="btn play"><img style="width: 30px; border-radius: 10px" class="img__src"
+                                               src="/images/playerImages/play.jpg" alt="btn"></div>
+                    <div class="btn next"><img style="width: 30px; border-radius: 10px"
+                                               src="/images/playerImages/next.jpg"
+                                               alt="btn"></div>
+                </div>
+                <div style="float: left; margin-left: 94px" class="songDurationOnPlayer">00:00</div>
+
             </div>
         </div>
     </div>
