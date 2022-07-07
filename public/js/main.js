@@ -10,24 +10,40 @@ const player = document.querySelector('.player'),
     audioId = document.querySelector('.audioId'),
     muzlo = document.querySelectorAll('.muzlo'),
     duration = document.querySelectorAll('.duration')
+
 playOnTrackBtn = document.querySelector('.playOnTrack')
+artistNameOnPlayer = document.querySelector('.artistNameOnPlayer')
+buttonSlide = document.querySelector('.buttonSlide')
+buttonUp = document.querySelector('.buttonUp')
+playerImage = document.querySelector('.playerImage')
+searcher = document.querySelector('.searchResults')
+searchField = document.querySelector('.OverallSearch')
+searchOptions = document.querySelector('.pesnya')
+body = document.querySelector('.bodyB')
+convert = document.querySelector('.convert')
 
-player.style.visibility = 'hidden';
 
 
-// Названия песен
-//const songs = []
+if (searcher.children.length !== 0) {
+    searcher.style.display = 'inline'
+}
 
-// Песня по умолчанию
-//let songIndex = 0
+searchField.addEventListener('click', () => {
+    if (searcher.children.length !== 0) {
+        searcher.style.display = 'inline'
+    } else {
+        searcher.style.display = 'none'
+    }
+})
 
-// Init
-//function loadSong(song) {
-//    title.innerHTML = song
-//    audio.src = `/audio/${song}.mp3`
-//}
+window.addEventListener('click', e => {
+    const target = e.target
+    if (!target.closest('.searchResults') && !target.closest('.OverallSearch')) {
+        searcher.style.display = 'none'
+    }
+})
 
-//loadSong(songs[songIndex])
+player.style.visibility = 'hidden'
 
 // Play
 function playSong() {
@@ -42,9 +58,7 @@ function pauseSong() {
     player.classList.remove('play')
     imgSrc.src = '/images/playerImages/play.jpg'
     audio.pause()
-    // highlightedItems.forEach(function (Element){
-    //     Element.children[0].children[5].src = ''
-    // })
+
 }
 
 playBtn.addEventListener('click', () => {
@@ -54,6 +68,32 @@ playBtn.addEventListener('click', () => {
     } else {
         playSong()
     }
+})
+
+buttonSlide.addEventListener('click', () => {
+    player.style.width = '550px'
+    player.style.height = '100px'
+    playerImage.style.height = '0px'
+    playerImage.style.width = '0px'
+    buttonSlide.style.display = 'none'
+    buttonUp.style.display = 'inline'
+    setTimeout(() => {
+        artistNameOnPlayer.style.display = 'none'
+    }, 625)
+
+})
+
+buttonUp.addEventListener('click', () => {
+    buttonUp.style.display = 'none'
+    buttonSlide.style.display = ''
+    player.style.width = '500px'
+    player.style.height = '530px'
+    setTimeout(() => {
+        playerImage.style.height = '350px'
+    }, 125)
+
+    playerImage.style.width = '350px'
+    artistNameOnPlayer.style.display = ''
 })
 
 // Next song
@@ -116,25 +156,25 @@ var highlightedItems = document.querySelectorAll(".pesnya");
 const progressTime = document.querySelector('.progressTime')
 songDurationOnPlayer = document.querySelector('.songDurationOnPlayer')
 
+
 highlightedItems.forEach(function (Element) {
-    var audioFromList = Element.children[0].children[3].innerHTML;
+    var audioFromList = Element.children[0].children[2].innerHTML;
     var currentArrayIndex = Element.children[0].children[0].innerHTML - 1;
-    var lengthOfAlbum = Element.children[0].children[7].innerHTML
-    var songsFromOneAlbum = document.querySelectorAll(`[id^="${Element.children[0].children[8].innerHTML}"]`)
+    var lengthOfAlbum = Element.children[0].children[6].innerHTML
+    var songsFromOneAlbum = document.querySelectorAll(`[id^="${Element.children[0].children[7].innerHTML}"]`)
 
     //download song
-    var songName = Element.children[0].children[3].innerHTML
-    Element.children[0].children[9].children[0].href = `/audio/${songName}.mp3`
+    var songName = Element.children[0].children[2].innerHTML
+    Element.children[0].children[8].children[0].href = `/audio/${songName}.mp3`
 
     //Clicked
     Element.children[0].children[1].addEventListener('click', () => {
+
 
         //other than clicked to be dynamic during mouseOn
         highlightedItems.forEach(function (Element) {
             Element.classList = 'pesnya'
             Element.children[0].children[1].children[0].src = '/images/playerImages/pngwing.com.png'
-            Element.children[0].children[2].classList = 'nowPlaying';
-
         })
 
         audio.addEventListener('ended', () => {
@@ -163,18 +203,10 @@ highlightedItems.forEach(function (Element) {
         })
 
         //stop and resume playing song
-        Element.children[0].children[2].classList = 'nowPlaying1';
+        //Element.children[0].children[2].classList = 'nowPlaying1';
         playBtn.addEventListener('click', () => {
             const isPlaying = player.classList.contains('play')
-            if (isPlaying) {
-                highlightedItems.forEach(function (Element) {
-                    Element.children[0].children[2].classList = 'nowPlaying';
-                })
-                Element.children[0].children[2].classList = 'nowPlaying1';
-            } else {
 
-                Element.children[0].children[2].classList = 'nowPlaying';
-            }
         })
 
         //play handling
@@ -186,7 +218,7 @@ highlightedItems.forEach(function (Element) {
         audio.play()
         player.classList.add('play')
 
-        var albumImage = Element.children[0].children[6].innerHTML
+        var albumImage = Element.children[0].children[5].innerHTML
         var playerImage = document.querySelector('.playerImage')
 
         playerImage.src = `/images/albumsImages/${albumImage}`
@@ -199,23 +231,23 @@ highlightedItems.forEach(function (Element) {
             var seconds = Math.trunc(((audio.currentTime / 60) - Math.trunc(audio.currentTime / 60)) * 60)
 
             if (seconds < 10) {
-                progressTime.innerHTML ='0'+ minutes +':0' + seconds
+                progressTime.innerHTML = '0' + minutes + ':0' + seconds
             } else if (seconds >= 10) {
-                progressTime.innerHTML ='0'+ minutes +':' + seconds
+                progressTime.innerHTML = '0' + minutes + ':' + seconds
             } else if (minutes >= 10 && seconds < 10) {
-                progressTime.innerHTML = minutes +':0' + seconds
+                progressTime.innerHTML = minutes + ':0' + seconds
             } else if (minutes >= 10 && seconds >= 10) {
-                progressTime.innerHTML =minutes +':' + seconds
+                progressTime.innerHTML = minutes + ':' + seconds
             }
 
             if (secondsDuration < 10) {
-                songDurationOnPlayer.innerHTML ='0'+ minutesDuration +':0' + secondsDuration
+                songDurationOnPlayer.innerHTML = '0' + minutesDuration + ':0' + secondsDuration
             } else if (secondsDuration >= 10) {
-                songDurationOnPlayer.innerHTML ='0'+ minutesDuration +':' + secondsDuration
+                songDurationOnPlayer.innerHTML = '0' + minutesDuration + ':' + secondsDuration
             } else if (minutesDuration >= 10 && secondsDuration < 10) {
-                songDurationOnPlayer.innerHTML = minutesDuration +':0' + secondsDuration
+                songDurationOnPlayer.innerHTML = minutesDuration + ':0' + secondsDuration
             } else if (minutesDuration >= 10 && secondsDuration >= 10) {
-                songDurationOnPlayer.innerHTML =minutesDuration +':' + secondsDuration
+                songDurationOnPlayer.innerHTML = minutesDuration + ':' + secondsDuration
             }
 
         })

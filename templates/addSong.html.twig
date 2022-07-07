@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div>
+        <div><h2>Добавить новую песню для альбома: <br><span style="color: yellowgreen">{{ album.name }}</span></h2></div>
+    </div>
+    <div class="createNewForm">
+        {{ form(formNewSong) }}
+    </div>
+
+    <div class="convertAdminPanel">
+        <div>
+            <span><img class="images" src="/images/albumsImages/{{ album.image }}" alt=""></span>
+            <span style="font-size: 30px">{{ album.name }}</span>
+        </div>
+        {% for song in songs %}
+           <div>
+               <div>{{ song.name }}</div>
+           </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -6,8 +6,35 @@
 
     <h1>Добавить новый альбом:</h1>
     <div class="createNewForm">
-        <h3>Add new album</h3>
-        {{ form(newAlbumForm) }}
+        <h3>Для начала выберите исполнителя</h3>
+
+    </div>
+
+    <div class="convertAdminPanel">
+        <div>
+            <form style="padding-bottom: 70px" action="" method="post">
+                <div style="width: 95%;" class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Введите имя</label>
+                    <input type="text" value="{{ postRequest }}" name="nameToFind" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Поиск</button>
+            </form>
+        </div>
+        <h2>Все исполнители:</h2>
+        <h4>{{ sorry }}</h4>
+        <p></p>
+        {% for artist in artists %}
+            <form action="/admin/albums/{{ artist.id }}" method="post">
+                <input type="hidden" name="artistAddId" value="{{ artist.id }}">
+                <div style="float: left; padding-right: 20px">
+                    <div class="artistsInAP">
+                        <input type="image" class="imageInAP"
+                               src="/images/artistsImage/{{ artist.image }}">
+                        <h3 class="artistNameInAP">{{ artist.name }}</h3>
+                    </div>
+                </div>
+            </form>
+        {% endfor %}
     </div>
 
 {% endblock %}

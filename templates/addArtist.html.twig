@@ -31,13 +31,16 @@
         <h4>{{ sorry }}</h4>
         <p></p>
         {% for artist in artists %}
-            <div style="float: left; padding-right: 20px"><a href="/artists/{{ artist.id }}"><img
-                            src="/images/artistsImage/{{ artist.image }}" alt="{{ artist.name }}"
-                            style="border-radius: 1000px; width: 250px; border: solid #210d0d 1px"></a>
-                <a href="/artists/{{ artist.id }}"
-                   style="text-decoration: none; color: #d6d6d6; text-transform: uppercase"><h3
-                            style="text-align: center">{{ artist.name }}</h3></a>
-            </div>
+            <form action="/admin/albums/{{ artist.id }}" method="post">
+                <input type="hidden" name="artistAddId" value="{{ artist.id }}">
+                <div style="float: left; padding-right: 20px">
+                    <div class="artistsInAP">
+                        <input type="image" class="imageInAP"
+                               src="/images/artistsImage/{{ artist.image }}">
+                        <h3 class="artistNameInAP">{{ artist.name }}</h3>
+                    </div>
+                </div>
+            </form>
         {% endfor %}
     </div>
 

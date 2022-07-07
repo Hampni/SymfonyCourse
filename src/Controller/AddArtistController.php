@@ -106,7 +106,6 @@ class AddArtistController extends AbstractController
         ]);
     }
 
-
     // All artists displaying
     public function artists(ArtistsRepository $artistsRepository)
     {

@@ -6,6 +6,7 @@
 parameters:
     artists_images_directory: '%kernel.project_dir%/public/images/artistsImage'
     albums_images_directory: '%kernel.project_dir%/public/images/albumsImages'
+    audio_directory: '%kernel.project_dir%/public/audio/'
 
 services:
     # default configuration for services in *this* file

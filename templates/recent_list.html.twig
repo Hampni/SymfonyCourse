@@ -1,0 +1,20 @@
+{% for artist in artists %}
+    {% for album in albums %}
+        {% for song in allSongs %}
+            {% if song.authorId == artist.id %}
+                {% if album.id == song.albumId %}
+                <div class="pesnya">
+                    <div style="padding: 10px">
+                        <span style="float: left; margin-right: 20px"><img style="width: 50px;" src="/images/albumsImages/{{ album.image }}" alt=""></span>
+                        <div><span>{{ song.name }}</span></div>
+                        <div><span><a href="/artists/{{ artist.id }}">{{ artist.name }}</a></span></div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+
+

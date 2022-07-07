@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div style="">
+        <button class="btn btn-outline-secondary"><a href="/admin/albums">Назад</a></button>
+
+        <h1>Добавить новый альбом:</h1>
+        <div class="createNewForm">
+            {{ form(newAlbumForm) }}
+        </div>
+    </div>
+    <div class="convertAdminPanel">
+        <div>
+            <div style="float: left; "><img
+                        style="border-radius: 1000px; width: 250px; border: solid #210d0d 1px"
+                        src="/images/artistsImage/{{ artist1.image }}" alt="123"></div>
+            <div style="float: top"><h1>{{ artist1.name }}</h1></div>
+            <div class="convertAlbums">
+                <h1 style="margin-top: 50px">Все альбомы этого исполнителя:</h1>
+                {% for album in albums1 %}
+                    <a href="/admin/songs/{{ album.id }}" style="text-decoration: none; color: white">
+                        <div class="albumsInAP">
+                            <img class="albums" src="/images/albumsImages/{{ album.image }}"
+                                 alt="img">
+                            <span class="nameAlbumInAP">{{ album.name }}</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
