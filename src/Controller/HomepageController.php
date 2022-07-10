@@ -3,22 +3,32 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Repository\AlbumsRepository;
 use App\Repository\ArtistsRepository;
 use App\Repository\SongsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class HomepageController extends AbstractController
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        // Avoid calling getUser() in the constructor: auth may not
+        // be complete yet. Instead, store the entire Security object.
+        $this->security = $security;
+    }
 
     /**
-     * @Route("/")
+     * @Route("/", name="homepage")
      */
-    public function homepage(ArtistsRepository $artistsRepository, SongsRepository $songsRepository): Response
+    public function homepage(Request $request, ArtistsRepository $artistsRepository, SongsRepository $songsRepository): Response
     {
-
         return $this->render('homepage.html.twig');
     }
 
@@ -74,6 +84,8 @@ class HomepageController extends AbstractController
             'searchRequest' => $postRequest
         ]);
     }
+
+
 
 
 }

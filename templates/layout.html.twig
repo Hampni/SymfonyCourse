@@ -17,7 +17,27 @@
     <a href="/">Homepage</a>
     <a href="/artists">Artists</a>
     <a href="/">Top Songs</a>
-    <a href="/admin">Admin Panel</a>
+
+
+    {% if app.user %}
+        You are logged in as {{ app.user.userIdentifier }}
+    {% endif %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <span style="float: right"><a href="{{ path('app_logout') }}">Выйти</a></span>
+    {% else %}
+        <span style="float: right"><a href="{{ path('app_login') }}">Войти</a></span>
+        <span style="float: right"><a href="{{ path('app_register') }}">Зарегестрироваться</a></span>
+    {% endif %}
+
+    {% if is_granted('ROLE_USER') %}
+        <span style="float: right"><a href="/liked">Понравившееся</a></span>
+    {% endif %}
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <span style="float: right"><a href="/admin">Admin Panel</a></span>
+    {% endif %}
+
     <hr>
 </header>
 <div class="header2">

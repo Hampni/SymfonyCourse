@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+    <a href="/admin/albums">Назад</a>
     <div>
         <div><h2>Добавить новую песню для альбома: <br><span style="color: yellowgreen">{{ album.name }}</span></h2></div>
     </div>
@@ -13,9 +14,10 @@
             <span><img class="images" src="/images/albumsImages/{{ album.image }}" alt=""></span>
             <span style="font-size: 30px">{{ album.name }}</span>
         </div>
-        {% for song in songs %}
-           <div>
-               <div>{{ song.name }}</div>
+        {% for key,song in songs %}
+           <div class="songsInAlbum">
+               <span>{{ key + 1 }}</span>
+               <span>{{ song.name }}</span>
            </div>
         {% endfor %}
     </div>

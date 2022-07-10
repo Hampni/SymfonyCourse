@@ -228,7 +228,7 @@ class AdminPanelController extends AbstractController
      */
     public function addSong($id, ArtistsRepository $artistsRepository, AlbumsRepository $albumsRepository, SongsRepository $songsRepository, Request $request, ManagerRegistry $managerRegistry)
     {
-
+    
 
         $album = $albumsRepository->find($id);
         $artist = $artistsRepository->find($album->getAuthorId());

@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
     <div class="convert">
         <div style="float: top">
             <div style="float: left; "><img
@@ -43,7 +44,7 @@
                                                 <span style="display: none"> {{ songs | length }}</span>
                                                 <span style="display: none">{{ song.albumId }}</span>
                                                 <button class="btn btn-outline-secondary"
-                                                        style="margin-left: 180px;border: none;padding-bottom: 10px">
+                                                        style="margin-left: 120px;border: none;padding-bottom: 10px">
                                                     <a
                                                             style="text-decoration: none; color: white;"
                                                             href="/audio/{{ song.name }}.mp3"
@@ -52,6 +53,17 @@
                                                              src="/images/playerImages/download.png" alt="">
                                                     </a>
                                                 </button>
+                                                {% if song.id in likedSongs %}
+                                                    <form style="display: inline" action="">
+                                                        <button style="border-radius: 20px" disabled>Liked</button>
+                                                    </form>
+                                                {% else %}
+                                                    <form style="display: inline" action="" method="post">
+                                                        <input type="hidden" name="liked" value="{{ song.id }}">
+                                                        <button style="border-radius: 20px" type="submit">Like &nbsp
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     {% endif %}
